@@ -30,8 +30,8 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/python-flask-app:latest .
-          docker push ${{ secrets.DOCKER_USERNAME }}/python-flask-app:latest
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/python-flask-app:${{ github.sha }} .
+          docker push ${{ secrets.DOCKERHUB_TOKEN }}/python-flask-app:${{ github.sha }}
 
   validate-manifests:
     runs-on: ubuntu-latest
