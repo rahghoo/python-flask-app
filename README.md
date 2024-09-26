@@ -131,5 +131,6 @@ python-flask-app-prod   NodePort   10.152.183.56   <none>        5001:31106/TCP 
 + echo Deployment completed!
 Deployment completed!
 ```
-![local_deployment_status_k8_dashboard](https://github.com/user-attachments/assets/b6aee51d-7bd2-4aba-9848-7d4c37f17f5c)
+![local_deployment_status_k8_dashboard](https://github.com/user-attachments/assets/46423980-99e4-42ce-b848-cf3383ff3a65)
+
 
