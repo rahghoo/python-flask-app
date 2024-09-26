@@ -53,3 +53,57 @@ jobs:
       - name: Render Kubernetes manifests
         run: |
           helm template python-flask-app ./chart
+
+  # deploy-to-eks:
+  #   runs-on: ubuntu-latest
+
+  #   env:
+  #     IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/python-flask-app
+  #     IMAGE_TAG: ${{ github.sha }}
+  #     CHART_PATH: ./chart
+
+  #   steps:
+  #     # Checkout code
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4.2.0
+
+  #     # Configure AWS Credentials
+  #     - name: Configure AWS Credentials
+  #       uses: aws-actions/configure-aws-credentials@v4.0.2
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: eu-central-1
+
+  #     # Update kubeconfig to access the EKS cluster
+  #     - name: Update kubeconfig
+  #       run: aws eks update-kubeconfig --name ppro-cluster --region eu-central-1
+
+  #     # Install Helm
+  #     - name: Install Helm
+  #       uses: azure/setup-helm@v4.2.0
+  #       with:
+  #         version: v3.16.1
+
+  #     # Deploy to Kubernetes - QA namespace
+  #     - name: Deploy to Kubernetes (QA)
+  #       run: |
+  #         helm upgrade --install $IMAGE_NAME-qa $CHART_PATH \
+  #           --namespace ${{ env.QA_NAMESPACE }} \
+  #           --set namespace=${{ env.QA_NAMESPACE }} \
+  #           --set image.repository=$IMAGE_NAME \
+  #           --set image.tag=$IMAGE_TAG \
+  #           --set image.pullPolicy=IfNotPresent \
+  #           --create-namespace
+
+  #     # Deploy to Kubernetes - Prod namespace (only if QA succeeds)
+  #     - name: Deploy to Kubernetes (Prod)
+  #       if: success()
+  #       run: |
+  #         helm upgrade --install $IMAGE_NAME-prod $CHART_PATH \
+  #           --namespace ${{ env.PROD_NAMESPACE }} \
+  #           --set namespace=${{ env.PROD_NAMESPACE }} \
+  #           --set image.repository=$IMAGE_NAME \
+  #           --set image.tag=$IMAGE_TAG \
+  #           --set image.pullPolicy=IfNotPresent \
+  #           --create-namespace

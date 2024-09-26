@@ -45,6 +45,18 @@ This project includes GitHub Actions workflows for building and pushing the dock
  - Build and push the docker image
  - validate manifests
 
+### Handling Multiple Environments:
+
+The pipeline supports two environments: **QA** and **Prod**. Each environment corresponds to a Kubernetes namespace (`qa` and `prod`).
+
+- Environment variables (`QA_NAMESPACE` and `PROD_NAMESPACE`) are defined at the job level to make the namespace handling dynamic and flexible.
+- For **QA**, the pipeline applies the Kubernetes manifests to the `qa` namespace.
+- For **Prod**, the pipeline applies the same manifests to the `prod` namespace.
+- These namespaces are passed dynamically to the `helm upgrade` command through environment variables.
+- The deployments to the **QA** and **Prod** namespaces occur in sequence, ensuring that the QA environment is deployed first. If needed, this sequence can be modified or parallelized, depending on requirements (e.g., only deploy to prod after successful testing in qa).
+
+The pipeline as described and implemented covers the basic requirement of deploying an application to multiple environments (qa and prod) by using Kubernetes namespaces to isolate the deployments. It dynamically handles these environments using environment variables, ensuring flexibility and consistency across deployments.
+
 ## Additional Information
 - For local testing, this setup uses [microk8s](https://microk8s.io/docs). Make sure that the Kubernetes cluster is properly set up and running before deploying
 - To trigger github workflow push or merge a pull request to the main branch
