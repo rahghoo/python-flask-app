@@ -29,7 +29,7 @@ chmod +x deploy-to-microk8s.sh
 sh -x deploy-to-microk8s.sh
 ```
 
-The script runs the below steps:
+The script runs the below steps:Local deployment status from k8's dashboard
  - Build Docker Image
  - Load the Docker Image into microk8s
  - Create namespaces if not exist
@@ -131,3 +131,13 @@ python-flask-app-prod   NodePort   10.152.183.56   <none>        5001:31106/TCP 
 + echo Deployment completed!
 Deployment completed!
 ```
+## Local deployment status from k8's dashboard
+
+![local_deployment_status_k8_dashboard](https://github.com/user-attachments/assets/46423980-99e4-42ce-b848-cf3383ff3a65)
+
+## Service Running on port 31106
+
+![service-running](https://github.com/user-attachments/assets/7be6bacf-78c5-48e9-ba5e-4cd77758a5f5)
+
+
+
