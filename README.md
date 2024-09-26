@@ -133,4 +133,7 @@ Deployment completed!
 ```
 ![local_deployment_status_k8_dashboard](https://github.com/user-attachments/assets/46423980-99e4-42ce-b848-cf3383ff3a65)
 
+![service-running](https://github.com/user-attachments/assets/7be6bacf-78c5-48e9-ba5e-4cd77758a5f5)
+
+
 
